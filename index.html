@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Parser</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>JSON Parser</h2>
+    <form id="jsonForm">
+        <label for="file">Step 1: Select File</label>
+        <input type="file" id="file" accept=".csv, .json">
+
+        <label for="file">Step 2: Specify Format</label>
+        <label for="fileType">File Type:</label>
+        <select id="fileType">
+            <option value="csv">CSV</option>
+            <option value="json" selected>JSON</option>
+        </select>
+
+        <label for="encoding">Character Encoding:</label>
+        <select id="encoding">
+            <option value="UTF-8" selected>UTF-8</option>
+            <!-- Add other encoding options if needed -->
+        </select>
+
+        <label for="delimiter">Delimiter:</label>
+        <select id="delimiter">
+            <option value="comma" selected>Comma</option>
+            <option value="semicolon">Semicolon</option>
+            <!-- Add other delimiter options if needed -->
+        </select>
+
+        <label for="hasHeader">Has Header:</label>
+        <input type="checkbox" id="hasHeader">
+
+        <hr>
+
+        <label for="displayFields">Step 3: Display Handling</label>
+        <select id="availableFields" multiple>
+            <option value="productId">Product Id</option>
+            <option value="subcategory">Subcategory</option>
+            <option value="title">Title</option>
+            <option value="price">Price</option>
+            <option value="popularity">Popularity</option>
+            <option value="description">Description</option>
+            <option value="rating">Rating</option>
+            <option value="utmSource">UTM Source</option>
+            <option value="utmMedium">UTM Medium</option>
+        </select>
+        <button type="button" id="addField">&gt;&gt;</button>
+        <button type="button" id="removeField">&lt;&lt;</button>
+        <select id="displayFields" multiple></select>
+
+        <hr>
+
+        <button type="button" onclick="parseJSON()">Next</button>
+        <button type="button" onclick="cancel()">Cancel</button>
+    </form>
+
+    <div id="tableContainer"></div>
+    <script src="app.js"></script>
+</body>
+</html>
