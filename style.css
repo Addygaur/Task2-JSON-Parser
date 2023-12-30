@@ -74,11 +74,23 @@ th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #eee;
+    position: relative;
 }
 
 th {
     background-color: #007bff;
     color: #fff;
+    text-transform: capitalize; /* Capitalize column titles */
+}
+
+td:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ccc; /* Line color between columns */
 }
 
 tr:nth-child(even) {

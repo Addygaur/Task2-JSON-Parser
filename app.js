@@ -13,7 +13,9 @@ function buildTableContent(data, displayFields) {
     var tableContent = '<table id="resultTable">';
     tableContent += '<thead><tr>';
     displayFields.forEach(field => {
-        tableContent += '<th>' + field + '</th>';
+        // Capitalize the first letter of each field
+        var capitalizedField = field.charAt(0).toUpperCase() + field.slice(1);
+        tableContent += '<th>' + capitalizedField + '</th>';
     });
     tableContent += '</tr></thead>';
 
@@ -27,7 +29,9 @@ function buildTableContent(data, displayFields) {
         var product = products[productId];
         tableContent += '<tr>';
         displayFields.forEach(field => {
-            tableContent += '<td>' + (product[field] || '-') + '</td>';
+            // Capitalize the first letter of each field
+            var capitalizedField = field.charAt(0).toUpperCase() + field.slice(1);
+            tableContent += '<td data-label="' + capitalizedField + '">' + (product[field] || '-') + '</td>';
         });
         tableContent += '</tr>';
     });
@@ -35,6 +39,7 @@ function buildTableContent(data, displayFields) {
 
     return tableContent;
 }
+
 
 function parseJSON() {
     var fileInput = document.getElementById('file');
