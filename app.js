@@ -1,3 +1,41 @@
+function displayTable(data, displayFields) {
+    var tableContent = buildTableContent(data, displayFields);
+
+    // Open a new window and write the table content
+    var newWindow = window.open();
+    newWindow.document.write('<html><head><title>JSON Parser Result</title><link rel="stylesheet" type="text/css" href="style.css"></head><body>');
+    newWindow.document.write('<h2>JSON Parser Result</h2>');
+    newWindow.document.write(tableContent);
+    newWindow.document.write('</body></html>');
+}
+
+function buildTableContent(data, displayFields) {
+    var tableContent = '<table id="resultTable">';
+    tableContent += '<thead><tr>';
+    displayFields.forEach(field => {
+        tableContent += '<th>' + field + '</th>';
+    });
+    tableContent += '</tr></thead>';
+
+    var products = data.products;
+    var sortedProducts = Object.keys(products).sort((a, b) => {
+        return products[b].popularity - products[a].popularity;
+    });
+
+    tableContent += '<tbody>';
+    sortedProducts.forEach(productId => {
+        var product = products[productId];
+        tableContent += '<tr>';
+        displayFields.forEach(field => {
+            tableContent += '<td>' + (product[field] || '-') + '</td>';
+        });
+        tableContent += '</tr>';
+    });
+    tableContent += '</tbody></table>';
+
+    return tableContent;
+}
+
 function parseJSON() {
     var fileInput = document.getElementById('file');
     var fileType = document.getElementById('fileType').value;
@@ -31,40 +69,6 @@ function parseJSON() {
 function getSelectedOptions(selectId) {
     var select = document.getElementById(selectId);
     return Array.from(select.options).map(option => option.value);
-}
-function displayTable(data, displayFields) {
-var tableContent = buildTableContent(data, displayFields);
-
-// Open a new window and write the table content
-var newWindow = window.open();
-newWindow.document.write(tableContent);
-}
-
-function buildTableContent(data, displayFields) {
-var tableContent = '<table>';
-tableContent += '<thead><tr>';
-displayFields.forEach(field => {
-    tableContent += '<th>' + field + '</th>';
-});
-tableContent += '</tr></thead>';
-
-var products = data.products;
-var sortedProducts = Object.keys(products).sort((a, b) => {
-    return products[b].popularity - products[a].popularity;
-});
-
-tableContent += '<tbody>';
-sortedProducts.forEach(productId => {
-    var product = products[productId];
-    tableContent += '<tr>';
-    displayFields.forEach(field => {
-        tableContent += '<td>' + (product[field] || '-') + '</td>';
-    });
-    tableContent += '</tr>';
-});
-tableContent += '</tbody></table>';
-
-return tableContent;
 }
 
 function cancel() {
